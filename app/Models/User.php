@@ -51,7 +51,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     // ------------------------------------------------------
-    // JWT AUTHENTICATION METHODS (Required by JWTSubject)
+    // JWT AUTHENTICATION METHODS
     // ------------------------------------------------------
 
     /**
@@ -63,27 +63,20 @@ class User extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     * This is where you put the data you want INSIDE the token.
-     */
     public function getJWTCustomClaims()
     {
         return [
             'user_id' => $this->id,
             'name'    => $this->name,
             'email'   => $this->email,
-            'role'    => 'user', // Required by your test specs
+            'role'    => 'user', 
         ];
     }
 
-    // ------------------------------------------------------
-    // RELATIONSHIPS
-    // ------------------------------------------------------
     
-    /**
-     * A user can have many products.
-     */
+    
+     // A user can have many products.
+     
     public function products()
     {
         return $this->hasMany(Product::class);

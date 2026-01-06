@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// 1. IMPORT THIS
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,3 +19,5 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 }
+
+

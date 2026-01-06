@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        // Ensure we use the 'api' guard for middleware checks
+        //api guard for middleware checks
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
@@ -78,8 +78,6 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
-        // CHANGE: Use 'api' guard to attempt login
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -98,7 +96,6 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        // CHANGE: Use 'api' guard to logout
         auth('api')->logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -114,7 +111,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        // CHANGE: Use 'api' guard to refresh
+        
         return $this->respondWithToken(auth('api')->refresh());
     }
 
@@ -123,7 +120,6 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            // CHANGE: Use 'api' guard to get factory settings (TTL)
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }

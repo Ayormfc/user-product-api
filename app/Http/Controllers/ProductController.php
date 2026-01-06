@@ -8,7 +8,7 @@ class ProductController extends Controller
 {
     public function index()
 {
-    // Requirement: Paginated and Sorted Descending
+    //  Pagination
     $products = Product::orderBy('created_at', 'desc')->paginate(10);
     return response()->json($products);
 }
